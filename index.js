@@ -1,19 +1,25 @@
 const express = require('express');
-const { connectToMongoDB } = require("./connect");
+const cors = require('cors');
+const { connectToMongoDB } = require("./connect.js");
+const { Schema, model } = require('mongoose');
+const { join } = require('path');
+
 const app = express();
+app.use(cors());
+
 const PORT = 8000;
-const urlRoute  = require("./routes/url");
-const mongoose = require('mongoose');
+
+const urlRoute = require("./routes/url.js");
 
 // Define URL schema
-const urlSchema = new mongoose.Schema({
+const urlSchema = new Schema({
   shortId: String,
   redirectURL: String,
   visitHistory: [{ timestamp: Date }],
 });
 
 // Create URL model
-const URL = mongoose.model('URL', urlSchema);
+const URL = model('URL', urlSchema);
 
 // Now you can use the URL model in your code
 
