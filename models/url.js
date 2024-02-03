@@ -1,22 +1,26 @@
 const mongoose = require("mongoose");
+const { fileURLToPath } = require('url');
+const { dirname } = require('path');
 
-const urlSchema = new mongoose.Schema({
+// Now you can use __dirname in your code
+console.log(__dirname);
+
+const urlSchema = new mongoose.Schema(
+  {
     shortId: {
-        type: String,
-        required: true,
-        unique: true,
-
+      type: String,
+      required: true,
+      unique: true,
     },
-    redirectURL:{
-type: String,
-required: true,
-
+    redirectURL: {
+      type: String,
+      required: true,
     },
-    visitHistory: [ { timestamp: {type: Number}}],
-},
-{timestamps: true}
+    visitHistory: [{ timestamp: { type: Number } }],
+  },
+  { timestamps: true }
 );
 
-const URL = mongoose.model('url', urlSchema)
+const URL = mongoose.model("url", urlSchema);
 
-module.exports= URL;
+module.exports = URL;
